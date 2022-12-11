@@ -1,17 +1,18 @@
 package Data;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	
 	protected String nombre;	// Nombre del Usuario.
 	protected String contrasenya;	// Contraseña del Usuario.
 	protected String email;	// Email del Usuario.
 	protected double saldo;	// Saldo del Usuario.
 	protected String cuentaPaypal; //Número de cuenta de Paypal
-	protected int nTarjeta; //Número de la tarjeta
-	protected Date caducidadTarjeta; //Fecha de caducidad de la tarjeta (Formato dd//mm/aaaa)
-	protected int codigoTarjeta; //Código de la tarjeta
+	protected String nTarjeta; //Número de la tarjeta
+	protected String caducidadTarjeta; //Fecha de caducidad de la tarjeta (Formato dd//mm/aaaa)
+	protected String codigoTarjeta; //Código de la tarjeta
 	protected ArrayList<Instrumento> comprasRealizadas;
 	
 	public String getNombre() {
@@ -44,22 +45,22 @@ public class Usuario {
 	public void setCuentaPaypal(String cuentaPaypal) {
 		this.cuentaPaypal = cuentaPaypal;
 	}
-	public int getnTarjeta() {
+	public String getnTarjeta() {
 		return nTarjeta;
 	}
-	public void setnTarjeta(int nTarjeta) {
+	public void setnTarjeta(String nTarjeta) {
 		this.nTarjeta = nTarjeta;
 	}
-	public Date getCaducidadTarjeta() {
+	public String getCaducidadTarjeta() {
 		return caducidadTarjeta;
 	}
-	public void setCaducidadTarjeta(Date caducidadTarjeta) {
+	public void setCaducidadTarjeta(String caducidadTarjeta) {
 		this.caducidadTarjeta = caducidadTarjeta;
 	}
-	public int getCodigoTarjeta() {
+	public String getCodigoTarjeta() {
 		return codigoTarjeta;
 	}
-	public void setCodigoTarjeta(int codigoTarjeta) {
+	public void setCodigoTarjeta(String codigoTarjeta) {
 		this.codigoTarjeta = codigoTarjeta;
 	}
 	public ArrayList<Instrumento> getComprasRealizadas() {
@@ -69,8 +70,8 @@ public class Usuario {
 		this.comprasRealizadas = comprasRealizadas;
 	}
 	
-	public Usuario(String nombre, String contrasenya, String email, double saldo, String cuentaPaypal, int nTarjeta,
-			Date caducidadTarjeta, int codigoTarjeta, ArrayList<Instrumento> comprasRealizadas) {
+	public Usuario(String nombre, String contrasenya, String email, double saldo, String cuentaPaypal, String nTarjeta,
+			String caducidadTarjeta, String codigoTarjeta, ArrayList<Instrumento> comprasRealizadas) {
 		super();
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;

@@ -15,7 +15,7 @@ public class Administrador extends Usuario{
 	}
 
 	public Administrador(String nombre, String contrasenya, String email, double saldo, String cuentaPaypal,
-			int nTarjeta, Date caducidadTarjeta, int codigoTarjeta, ArrayList<Instrumento> comprasRealizadas,
+			String nTarjeta, String caducidadTarjeta, String codigoTarjeta, ArrayList<Instrumento> comprasRealizadas,
 			String codigoAdmin) {
 		super(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta,
 				comprasRealizadas);
