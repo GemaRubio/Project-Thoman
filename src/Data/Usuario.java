@@ -82,20 +82,7 @@ public class Usuario {
 		this.codigoTarjeta = codigoTarjeta;
 		this.comprasRealizadas = comprasRealizadas;
 	}
-	
-	public Usuario() {
-		super();
-		this.nombre = "";
-		this.contrasenya = "";
-		this.email = "";
-		this.saldo = 0;
-		this.cuentaPaypal = "";
-		this.nTarjeta = 0;
-		//TODO
-		this.caducidadTarjeta = ;
-		this.codigoTarjeta = 0;
-		this.comprasRealizadas = new ArrayList<Instrumento>();
-	}
+
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", contrasenya=" + contrasenya + ", email=" + email + ", saldo=" + saldo

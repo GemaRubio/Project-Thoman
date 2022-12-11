@@ -21,11 +21,6 @@ public class Administrador extends Usuario{
 				comprasRealizadas);
 		this.codigoAdmin = codigoAdmin;
 	}
-	
-	public Administrador() {
-		super();
-		this.codigoAdmin = "";
-	}
 
 	@Override
 	public String toString() {

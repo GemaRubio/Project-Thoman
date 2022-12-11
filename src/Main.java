@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-	//	VentanaPrincipal vp = new VentanaPrincipal();
+		VentanaPrincipal vp = new VentanaPrincipal();
 	//	VentanaRegistrarse vr = new VentanaRegistrarse();
 	//	VentanaLogin vl = new VentanaLogin();
 	//	VentanaVerCarrito vvc = new VentanaVerCarrito();
@@ -12,7 +12,7 @@ public class Main {
 	//	VentanaCambiarContrasenya vcc = new VentanaCambiarContrasenya();
 	//	VentanaCambiarEmail vce = new VentanaCambiarEmail();
 	//	VentanaCambiarMetodosPago vcmp = new VentanaCambiarMetodosPago();
-		VentanaAjustes va = new VentanaAjustes();
+	//	VentanaAjustes va = new VentanaAjustes();
 	//	VentanaAdmin va = new VentanaAdmin();
 	//	VentanaServicioAyuda vsa = new VentanaServicioAyuda();
 	//	VentanaSeleccionMetodoPago vsmp = new VentanaSeleccionMetodoPago();
