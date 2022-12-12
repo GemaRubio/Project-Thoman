@@ -67,6 +67,52 @@ public class VentanaLogin extends JFrame{
 		setVisible(true);
 		
 		// Configuración de los eventos.
+		//Boton Aceptar (Prueba)
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				char[]input = txtContrasenya.getPassword();
+				String user = txtUsuario.getText();
+				if(isUserCorrect(user, input)) {
+					JOptionPane.showMessageDialog(pCentro, "Usuario correctamente logeado");
+				}else {
+					JOptionPane.showMessageDialog(pCentro, "Usuario o contrasenya incorrecto",
+					"ERROR",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			};
+		});
+		
+		//Boton Inicio
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaPrincipal vp = new VentanaPrincipal();
+			}
+		});
+				
+		//Boton Registrarse 
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaRegistrarse vr = new VentanaRegistrarse();
+				}
+		});
+	}	
+	
+	//Prueba comprobar Usuario y Contraseña
+	private boolean isUserCorrect(String user, char[] input) {
+		boolean isCorrect = true;
+		char[] correctPassword = {'1', '2', '3'};
+		String correctUser = "aaa";
+		
+		if(input.length != correctPassword.length) {
+			isCorrect = false;
+		}else {
+			isCorrect = Arrays.equals(input, correctPassword);
+		}
+		return isCorrect;
+	}
+	
 		
 	}
 
