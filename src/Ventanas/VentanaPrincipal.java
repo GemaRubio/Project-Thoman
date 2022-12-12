@@ -56,7 +56,7 @@ public class VentanaPrincipal extends JFrame {
 		//TODO
 		//Dar formato a la JLIST
 		JList<Instrumento> JListaIntrumentos = new JList<>();	// JList de instrumentos.
-		
+		ArrayList<Instrumento> instrumentos;	// Lista de instrumentos.
 		JButton btnAnyadirAlCarrito= new JButton("Añadir al carrito");
 		
 
@@ -94,6 +94,50 @@ public class VentanaPrincipal extends JFrame {
 		setVisible(true);
 		
 		// Configuración de los eventos.
+		
+		//Evento Inicio
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipal vp = new VentanaPrincipal();
+			}
+		});
+		
+		// Evento Registrarse
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaRegistrarse vr = new VentanaRegistrarse();
+				}
+		});
+		
+		//Evento Login
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaLogin vl = new VentanaLogin();
+			}
+		});
+		
+		//Evento Quitar Filtro
+		btnQuitarFiltros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rBtnCuerda.setSelected(false);
+				rBtnViento.setSelected(false);
+				rBtnPercusion.setSelected(false);
+				sPrecio.setValue(10000);
+				cbGibson.setSelected(false);
+				cbThomann.setSelected(false);
+				
+			}
+		});
+		
+		//Evento Anyadir al Carrito
+		btnAnyadirAlCarrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Para poder anyadir al carrito tienes que iniciar sesion o registrarte");
+			}
+		});
+	}
 	}
 		
 }
