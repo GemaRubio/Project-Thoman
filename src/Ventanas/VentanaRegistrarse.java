@@ -85,6 +85,31 @@ public class VentanaRegistrarse  extends JFrame{
 		
 		// Configuración de los eventos.
 		
+		//Boton Aceptar : Falta anyadir el usuario al txt
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipal vp = new VentanaPrincipal();
+				JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
+			}
+			
+		});
+
+		//Boton Inicio
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaPrincipal vp = new VentanaPrincipal();
+			}
+		});
+		
+		//Boton Login
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaLogin vl = new VentanaLogin();
+			}
+		});
+		
 	}
 
 }
