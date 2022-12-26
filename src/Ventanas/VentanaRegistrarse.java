@@ -88,11 +88,55 @@ public class VentanaRegistrarse  extends JFrame{
 		
 		// Configuración de los eventos.
 		
-		//Boton Aceptar : Falta anyadir el usuario al txt
+		//Boton Aceptar 
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipal vp = new VentanaPrincipal();
-				JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
+				Usuario u;
+				try {
+					Usuario guardarUsuario = new Usuario(txtUsuario.getText(), txtContrasenya.getText(), txtEmail.getText(), 0, "", "", "", "", new ArrayList<Instrumento>());
+					FileInputStream ficheroLeer = new FileInputStream("src\\Files\\ficheroUsuarios.dat");
+					ObjectInputStream ois = new ObjectInputStream(ficheroLeer);
+					u = (Usuario)ois.readObject();
+					if(u.getNombre().equals(txtUsuario.getText()) | u.getEmail().equals(txtEmail.getText())) {
+						JOptionPane.showMessageDialog(null, "Usuario ya registrado");
+					} else {
+						if(txtUsuario.getText().length() < 3 | txtContrasenya.getText().length() < 3) {
+							JOptionPane.showMessageDialog(null, "Usuario o contrasenya no validos");
+						} else {
+							if(txtEmail.getText().contains("@") && txtEmail.getText().contains(".com")) {
+								if(txtContrasenya.getText().equals(txtRepetirContrasenya.getText())) {
+									try {
+										FileOutputStream fichero = new FileOutputStream("src\\Files\\ficheroUsuarios.dat");
+										ObjectOutputStream oos = new ObjectOutputStream(fichero);
+										oos.writeObject(guardarUsuario);
+										oos.close();
+										ois.close();
+									} catch(FileNotFoundException ex) {
+										ex.printStackTrace();
+									} catch(IOException ex) {
+										ex.printStackTrace();				
+									}
+									dispose();
+									//Hay que cambiar por la Ventana de Usuario
+									VentanaPrincipal vp = new VentanaPrincipal();
+									JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
+								} else {
+									JOptionPane.showMessageDialog(null, "Las contrasenyas no coinciden");
+								}
+							
+							} else {
+								JOptionPane.showMessageDialog(null, "Introduzca un e-mail valido");
+							}
+						}
+					}
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				} catch (ClassNotFoundException ex) {
+					ex.printStackTrace();
+				}
+			}
 			}
 			
 		});
