@@ -74,14 +74,24 @@ public class VentanaLogin extends JFrame{
 		//Boton Aceptar (Prueba)
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				char[]input = txtContrasenya.getPassword();
-				String user = txtUsuario.getText();
-				if(isUserCorrect(user, input)) {
-					JOptionPane.showMessageDialog(pCentro, "Usuario correctamente logeado");
-				}else {
-					JOptionPane.showMessageDialog(pCentro, "Usuario o contrasenya incorrecto",
-					"ERROR",
-					JOptionPane.ERROR_MESSAGE);
+				Usuario u;
+				try {
+					FileInputStream ficheroLeer = new FileInputStream("src\\Files\\ficheroUsuarios.dat");
+					ObjectInputStream ois = new ObjectInputStream(ficheroLeer);
+					u = (Usuario)ois.readObject();
+					if(u.getNombre().equals(txtUsuario.getText()) && u.getContrasenya().equals(txtContrasenya.getText())) {
+						JOptionPane.showMessageDialog(null, "Login correcto");
+						dispose();
+						VentanaPrincipal vp = new VentanaPrincipal();
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+					}
+					
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				} catch (ClassNotFoundException ex) {
+					ex.printStackTrace();
 				}
 			};
 		});
@@ -102,20 +112,5 @@ public class VentanaLogin extends JFrame{
 				}
 		});
 	}	
-	
-	//Prueba comprobar Usuario y Contraseña
-	private boolean isUserCorrect(String user, char[] input) {
-		boolean isCorrect = true;
-		char[] correctPassword = {'1', '2', '3'};
-		String correctUser = "aaa";
-		
-		if(input.length != correctPassword.length) {
-			isCorrect = false;
-		}else {
-			isCorrect = Arrays.equals(input, correctPassword);
-		}
-		return isCorrect;
-	}
-
 }
 
