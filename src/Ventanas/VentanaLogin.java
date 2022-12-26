@@ -71,7 +71,7 @@ public class VentanaLogin extends JFrame{
 		setVisible(true);
 		
 		// Configuración de los eventos.
-		//Boton Aceptar (Prueba)
+		//Boton Aceptar 
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario u;
@@ -82,6 +82,7 @@ public class VentanaLogin extends JFrame{
 					if(u.getNombre().equals(txtUsuario.getText()) && u.getContrasenya().equals(txtContrasenya.getText())) {
 						JOptionPane.showMessageDialog(null, "Login correcto");
 						dispose();
+						//Cambiar por Ventana de Usuario
 						VentanaPrincipal vp = new VentanaPrincipal();
 						
 					} else {
