@@ -1,6 +1,10 @@
 package Ventanas;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+
 import javax.swing.*;
 
 public class VentanaLogin extends JFrame{
@@ -111,9 +115,6 @@ public class VentanaLogin extends JFrame{
 			isCorrect = Arrays.equals(input, correctPassword);
 		}
 		return isCorrect;
-	}
-	
-		
 	}
 
 }

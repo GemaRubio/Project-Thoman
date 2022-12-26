@@ -50,8 +50,7 @@ public class Instrumento {
 	
 	@Override
 	public String toString() {
-		return "Instrumento [nombre=" + nombre + ", marca=" + marca + ", precio=" + precio + ", descripcion="
-				+ descripcion + ", tipoInstrumento=" + tipoInstrumento + "]";
+		return nombre + ", " + marca + ", " + precio + ", " + descripcion + ", " + tipoInstrumento;
 	}
 	
 }

@@ -2,7 +2,13 @@ package Ventanas;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import Data.Instrumento;
+import Data.TipoInstrumento;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -54,9 +60,51 @@ public class VentanaPrincipal extends JFrame {
 		JButton btnQuitarFiltros = new JButton("Quitar filtros");
 		
 		//TODO
-		//Dar formato a la JLIST
-		JList<Instrumento> JListaIntrumentos = new JList<>();	// JList de instrumentos.
-		ArrayList<Instrumento> instrumentos;	// Lista de instrumentos.
+		//Se crea un array de instrumentos vacio.
+		ArrayList<Instrumento> instrumentos = new ArrayList<Instrumento>();
+		//Se inicializa y se hace una consulta a la base de datos de todos los instrumentos para añadirlos al array de instrumentos.
+		try 
+		{
+			Class.forName("org.sqlite.JDBC");
+			String dburl = "jdbc:sqlite:src\\Db\\Instrumentos.db";
+			Connection conexion = DriverManager.getConnection(dburl);
+				 
+			Statement Consulta = conexion.createStatement();
+							   
+			ResultSet rs = Consulta.executeQuery("SELECT * FROM Instrumentos");
+			
+			while(rs.next())
+			 {
+				 
+				if (rs.getString(5).equals("CUERDA")) {
+					Instrumento inst = new Instrumento(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), TipoInstrumento.CUERDA);
+					instrumentos.add(inst);
+				} else if (rs.getString(5).equals("VIENTO")) {
+					Instrumento inst = new Instrumento(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), TipoInstrumento.VIENTO);
+					instrumentos.add(inst);
+				} else if (rs.getString(5).equals("PERCUSION")) {
+					Instrumento inst = new Instrumento(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), TipoInstrumento.PERCUSION);
+					instrumentos.add(inst);
+				}
+				
+			 }
+			 rs.close();
+			
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("Error al consultar o inicializar la base de datos" + e);
+		}
+		
+		//Se añaden los instrumentos del arraylist instrumentos al modelo de la lista y el modelo a la Jlist
+		JList<Instrumento> JListaIntrumentos = new JList<Instrumento>();	// JList de instrumentos.
+		DefaultListModel<Instrumento> mlInstrumento = new DefaultListModel<Instrumento>();
+		for (Instrumento i : instrumentos) {
+			mlInstrumento.addElement(i);
+		}
+		JListaIntrumentos.setModel(mlInstrumento);
+		JListaIntrumentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		JButton btnAnyadirAlCarrito= new JButton("Añadir al carrito");
 		
 
@@ -137,7 +185,52 @@ public class VentanaPrincipal extends JFrame {
 				JOptionPane.showMessageDialog(null, "Para poder anyadir al carrito tienes que iniciar sesion o registrarte");
 			}
 		});
-	}
+		
+		btnBuscar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//Selección individual
+				if (rBtnCuerda.isSelected()) {
+					
+				} else if (rBtnViento.isSelected()) {
+					
+				} else if (rBtnPercusion.isSelected()) {
+					
+				} else if (cbGibson.isSelected()) {
+					
+				} else if (cbThomann.isSelected()) {
+					
+				} 
+				//Selección dual
+				else if (rBtnCuerda.isSelected() & rBtnViento.isSelected()) {
+					
+				} else if (rBtnCuerda.isSelected() & rBtnPercusion.isSelected()) {
+					
+				} else if (rBtnCuerda.isSelected() & cbGibson.isSelected()) {
+					
+				} else if (rBtnCuerda.isSelected() & cbThomann.isSelected()) {
+					
+				} else if (rBtnViento.isSelected() & rBtnPercusion.isSelected()) {
+					
+				} else if (rBtnViento.isSelected() & cbGibson.isSelected()) {
+					
+				} else if (rBtnViento.isSelected() & cbThomann.isSelected()) {
+					
+				} else if (rBtnPercusion.isSelected() & cbGibson.isSelected()) {
+					
+				} else if (rBtnPercusion.isSelected() & cbThomann.isSelected()) {
+					
+				}
+				//Selección trial
+				else if (rBtnCuerda.isSelected() & rBtnViento.isSelected() & rBtnPercusion.isSelected()) {
+					
+				} else if (rBtnCuerda.isSelected() & cbGibson.isSelected() & cbThomann.isSelected()) {
+					
+				}
+			}
+		});
 	}
 		
 }
