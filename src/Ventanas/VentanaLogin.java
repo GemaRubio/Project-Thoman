@@ -3,9 +3,15 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Arrays;
 
 import javax.swing.*;
+
+import Data.Usuario;
 
 public class VentanaLogin extends JFrame{
 	
