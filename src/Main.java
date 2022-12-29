@@ -28,19 +28,22 @@ public class Main {
 		
 	// TODO Date clase usuarios
 		
+	File f = new File("src\\Files\\ficheroUsuarios.dat");
+		
 	Usuario u1 = new Usuario("Fede", "fede", "fede@gmail.com", 0, "", "", "", "", new ArrayList<Instrumento>());
-	Administrador a1 = new Administrador("admin", "admin", "admin@gmail.com", 0, "", "", "", "", new ArrayList<Instrumento>(), "ASDF576");
+	Administrador a1 = new Administrador("Admin", "admin", "admin@gmail.com", 0, "", "", "", "", new ArrayList<Instrumento>(), "ASDF576");
 	
 	try {
-		FileOutputStream ficheroUsuarios = new FileOutputStream("src\\Files\\ficheroUsuarios.dat");
-		ObjectOutputStream oos = new ObjectOutputStream(ficheroUsuarios);
-		oos.writeObject(u1);
-		oos.writeObject(a1);
-		oos.close();
-	} catch (IOException e) {
+		if(!f.exists()) {
+			FileOutputStream ficheroUsuarios = new FileOutputStream(f);
+			ObjectOutputStream oos = new ObjectOutputStream(ficheroUsuarios);
+			oos.writeObject(u1);
+		    oos.writeObject(a1);
+			oos.close();
+		} 
+	}catch (IOException e) {
 		e.printStackTrace();
 	}
-	
 	}
 
 }
