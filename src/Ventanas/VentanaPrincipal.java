@@ -191,44 +191,211 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//Selección individual
-				if (rBtnCuerda.isSelected()) {
+				//Se eliminan todos los elementos del modelo de lista.
+				mlInstrumento.removeAllElements();
+				
+				//Se crea el ArrayList vacío para que cada vez que se pulse buscar la lista de instrumentos filtrados siempre esté vacía.
+				ArrayList<Instrumento> filtrados = new ArrayList<Instrumento>();
+				
+				/*
+				Según los botones que estén seleccionados y si cumple los requisitos el instrumento, se añadirá a lista de filtrados.
+				
+				Este algoritmo funciona de la siguiente manera:
+				Si no hay ningún botón seleccionado se muestran todos los instrumentos, por el contrario, con que haya un botón seleccionado o más
+				empieza a buscar las posibles combinaciones de los botones hasta encontrara la correcta, despues se analizan las caracteristicas de
+				cada instrumento si son las correctas se añaden a la lista de filtrados. Finalmente esta lista se pasará como modelo de lista para 
+				poder ser mostrada en la JList.
+				*/
+				if (rBtnCuerda.isSelected() == true || rBtnViento.isSelected() == true || rBtnPercusion.isSelected() == true 
+						|| cbGibson.isSelected() == true || cbThomann.isSelected() == true  || sPrecio.getValue() >= 0) {
+					for (Instrumento i : instrumentos) {
+						if (i.getPrecio() <= sPrecio.getValue()) {
 					
-				} else if (rBtnViento.isSelected()) {
-					
-				} else if (rBtnPercusion.isSelected()) {
-					
-				} else if (cbGibson.isSelected()) {
-					
-				} else if (cbThomann.isSelected()) {
-					
-				} 
-				//Selección dual
-				else if (rBtnCuerda.isSelected() & rBtnViento.isSelected()) {
-					
-				} else if (rBtnCuerda.isSelected() & rBtnPercusion.isSelected()) {
-					
-				} else if (rBtnCuerda.isSelected() & cbGibson.isSelected()) {
-					
-				} else if (rBtnCuerda.isSelected() & cbThomann.isSelected()) {
-					
-				} else if (rBtnViento.isSelected() & rBtnPercusion.isSelected()) {
-					
-				} else if (rBtnViento.isSelected() & cbGibson.isSelected()) {
-					
-				} else if (rBtnViento.isSelected() & cbThomann.isSelected()) {
-					
-				} else if (rBtnPercusion.isSelected() & cbGibson.isSelected()) {
-					
-				} else if (rBtnPercusion.isSelected() & cbThomann.isSelected()) {
-					
+							if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true 
+							&& cbGibson.isSelected() == true && cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									|| i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) && (i.getMarca().equals(cbGibson.getText())
+									|| i.getMarca().equals(cbThomann.getText()))) {
+								filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true 
+									&& cbGibson.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									|| i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}	
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true 
+									&& cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									|| i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}	
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && cbGibson.isSelected() == true
+									&& cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)) 
+									&& (i.getMarca().equals(cbGibson.getText()) || i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true
+									&& cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) 
+									&& (i.getMarca().equals(cbGibson.getText()) || i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+								}	
+							} else if (rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true
+									&& cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) 
+									&& (i.getMarca().equals(cbGibson.getText()) || i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+								}	
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									|| i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && cbGibson.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true && cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)
+									) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnPercusion.isSelected() == true && cbThomann.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)
+									) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && cbGibson.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) && (i.getMarca().equals(cbGibson.getText())
+									|| i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)
+									) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && cbGibson.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) && (i.getMarca().equals(cbGibson.getText())
+									|| i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+								}
+							} else if (rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION) && (i.getMarca().equals(cbGibson.getText())
+									|| i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+								}
+							}  else if (rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && cbGibson.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnPercusion.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnViento.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && rBtnPercusion.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && cbGibson.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && rBtnPercusion.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) || i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && cbGibson.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnPercusion.isSelected() == true && cbGibson.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION) && i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnPercusion.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION) && i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (cbGibson.isSelected() == true && cbThomann.isSelected() == true) {
+								if (i.getMarca().equals(cbGibson.getText()) || i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.CUERDA)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnViento.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)) {
+									filtrados.add(i);
+								}
+							} else if (rBtnPercusion.isSelected() == true) {
+								if (i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) {
+									filtrados.add(i);
+								}
+							} else if (cbGibson.isSelected() == true) {
+								if (i.getMarca().equals(cbGibson.getText())) {
+									filtrados.add(i);
+								}
+							} else if (cbThomann.isSelected() == true) {
+								if (i.getMarca().equals(cbThomann.getText())) {
+									filtrados.add(i);
+								}
+							} else if (rBtnCuerda.isSelected() == false || rBtnViento.isSelected() == false || rBtnPercusion.isSelected() == false 
+									|| cbGibson.isSelected() == false || cbThomann.isSelected() == false) {
+								if ((i.getTipoInstrumento().equals(TipoInstrumento.CUERDA) || i.getTipoInstrumento().equals(TipoInstrumento.VIENTO)
+									|| i.getTipoInstrumento().equals(TipoInstrumento.PERCUSION)) && (i.getMarca().equals(cbGibson.getText())
+									|| i.getMarca().equals(cbThomann.getText()))) {
+									filtrados.add(i);
+							}
+						} 
+					}
+			}
+			
+				for (Instrumento instrumento : filtrados) {
+					mlInstrumento.addElement(instrumento);
 				}
-				//Selección trial
-				else if (rBtnCuerda.isSelected() & rBtnViento.isSelected() & rBtnPercusion.isSelected()) {
-					
-				} else if (rBtnCuerda.isSelected() & cbGibson.isSelected() & cbThomann.isSelected()) {
-					
+			
+			} else {
+				for (Instrumento instrumento : instrumentos) {
+					mlInstrumento.addElement(instrumento);
 				}
+			}
+				//Se añade el modelo de instrumentos filtrados a la JList.
+				JListaIntrumentos.setModel(mlInstrumento);
+				JListaIntrumentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			}
 		});
 	}
