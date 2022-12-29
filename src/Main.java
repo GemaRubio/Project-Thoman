@@ -38,7 +38,7 @@ public class Main {
 			FileOutputStream ficheroUsuarios = new FileOutputStream(f);
 			ObjectOutputStream oos = new ObjectOutputStream(ficheroUsuarios);
 			oos.writeObject(u1);
-		    oos.writeObject(a1);
+		        oos.writeObject(a1);
 			oos.close();
 		} 
 	}catch (IOException e) {
