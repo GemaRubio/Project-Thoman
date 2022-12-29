@@ -105,51 +105,68 @@ public class VentanaRegistrarse  extends JFrame{
 		//Boton Aceptar 
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Usuario u;
+				File f = new File("src\\Files\\ficheroUsuarios.dat");
+				Usuario guardarUsuario = new Usuario(txtUsuario.getText(), txtContrasenya.getText(), txtEmail.getText(), 0, "", "", "", "", new ArrayList<Instrumento>());
+				boolean registrado = false;
+				//Empieza a leer fichero
 				try {
-					Usuario guardarUsuario = new Usuario(txtUsuario.getText(), txtContrasenya.getText(), txtEmail.getText(), 0, "", "", "", "", new ArrayList<Instrumento>());
-					FileInputStream ficheroLeer = new FileInputStream("src\\Files\\ficheroUsuarios.dat");
-					ObjectInputStream ois = new ObjectInputStream(ficheroLeer);
-					u = (Usuario)ois.readObject();
-					if(u.getNombre().equals(txtUsuario.getText()) | u.getEmail().equals(txtEmail.getText())) {
-						JOptionPane.showMessageDialog(null, "Usuario ya registrado");
-					} else {
+					FileInputStream fis = new FileInputStream(f);
+					ObjectInputStream ois = new ObjectInputStream(fis);
+					Object u = ois.readObject();
+					if(u instanceof Usuario) {
+						if(((Usuario) u).getNombre().equals(txtUsuario.getText()) || (((Usuario) u).getEmail().equals(txtEmail.getText()))) {
+							registrado = true;
+							lErrorUsuario.show();
+							lErrorEmail.show();
+						}
+					}
+					while(u != null && registrado == false) { 
+						if(u instanceof Usuario) {
+							if(((Usuario) u).getNombre().equals(txtUsuario.getText()) || (((Usuario) u).getEmail().equals(txtEmail.getText()))) {
+								registrado = true;
+								lErrorUsuario.show();
+								lErrorEmail.show();
+							}
+						}
+						u = ois.readObject();
+					} 
+					ois.close();
+					fis.close();
+				 
+				} catch(IOException | ClassNotFoundException ex) {
+					System.out.println("Fin de fichero");
+				} //Aqui acaba leer en fichero
+				
+				//Empieza escribir en fichero
+				try {
+					FileOutputStream fos = new FileOutputStream(f, true);
+					AnyadirUsuario oos = new AnyadirUsuario(fos);
+					if(registrado == false) {
 						if(txtUsuario.getText().length() < 3 | txtContrasenya.getText().length() < 3) {
 							JOptionPane.showMessageDialog(null, "Usuario o contrasenya no validos");
 						} else {
 							if(txtEmail.getText().contains("@") && txtEmail.getText().contains(".com")) {
 								if(txtContrasenya.getText().equals(txtRepetirContrasenya.getText())) {
-									try {
-										FileOutputStream fichero = new FileOutputStream("src\\Files\\ficheroUsuarios.dat");
-										ObjectOutputStream oos = new ObjectOutputStream(fichero);
-										oos.writeObject(guardarUsuario);
-										oos.close();
-										ois.close();
-									} catch(FileNotFoundException ex) {
-										ex.printStackTrace();
-									} catch(IOException ex) {
-										ex.printStackTrace();				
-									}
+									oos.writeObject(guardarUsuario);
+									oos.close();
+									fos.close();
 									dispose();
-									//Hay que cambiar por la Ventana de Usuario
-									VentanaPrincipal vp = new VentanaPrincipal();
-									JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
+									JOptionPane.showMessageDialog(null, "Registro realizado con exito");
+									//Hay que añadir la ventana principal del usuario 
 								} else {
-									JOptionPane.showMessageDialog(null, "Las contrasenyas no coinciden");
+									lErrorContrasenya.show();
+									lErrorContrasenya2.show();
 								}
-							
 							} else {
 								JOptionPane.showMessageDialog(null, "Introduzca un e-mail valido");
 							}
 						}
+					} else {
+						lErrorUsuario.show();
 					}
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (IOException ex) {
+				} catch(IOException ex) {
 					ex.printStackTrace();
-				} catch (ClassNotFoundException ex) {
-					ex.printStackTrace();
-				}
+				} //Aqui acaba escribir en fichero
 			}
 		});
 
