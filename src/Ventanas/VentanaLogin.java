@@ -12,6 +12,7 @@ import java.util.Arrays;
 import javax.swing.*;
 
 import Data.Usuario;
+import Data.Administrador;
 
 public class VentanaLogin extends JFrame{
 	
@@ -80,26 +81,40 @@ public class VentanaLogin extends JFrame{
 		//Boton Aceptar 
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Usuario u;
+				boolean admin = false;
+				boolean loginU = false;
 				try {
 					FileInputStream ficheroLeer = new FileInputStream("src\\Files\\ficheroUsuarios.dat");
 					ObjectInputStream ois = new ObjectInputStream(ficheroLeer);
-					u = (Usuario)ois.readObject();
-					if(u.getNombre().equals(txtUsuario.getText()) && u.getContrasenya().equals(txtContrasenya.getText())) {
-						JOptionPane.showMessageDialog(null, "Login correcto");
-						dispose();
-						//Cambiar por Ventana de Usuario
-						VentanaPrincipal vp = new VentanaPrincipal();
+					Object u = ois.readObject();
+					while(u != null && loginU == false) {
+						if(u instanceof Administrador) {
+							if(((Administrador)u).getNombre().equals(txtUsuario.getText()) && ((Administrador)u).getContrasenya().equals(txtContrasenya.getText()));
+								admin = true;
+								loginU = true;
+								JOptionPane.showMessageDialog(null, "Login de administrador correcto");
+								dispose();
+								VentanaAdmin ad = new VentanaAdmin();
+						}
 						
-					} else {
-						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-					}
+						if(u instanceof Usuario && admin == false) {
+							if(((Usuario) u).getNombre().equals(txtUsuario.getText()) && ((Usuario) u).getContrasenya().equals(txtContrasenya.getText())) {
+								JOptionPane.showMessageDialog(null, "Login correcto");
+								loginU = true;
+								dispose();
+							}
+						}
+						u = ois.readObject();
 					
+					} //Falta añadir ventana principal de usuario
+	
 				} catch (IOException ex) {
-					ex.printStackTrace();
+					lErrorUsuario.show();
+					lErrorContrasenya.show();
+					System.out.println("Lectura de fichero finalizada");
 				} catch (ClassNotFoundException ex) {
 					ex.printStackTrace();
-				}
+				} 
 			};
 		});
 		
