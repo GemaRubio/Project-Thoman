@@ -1,11 +1,16 @@
 package Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import Data.Instrumento;
+import Data.TipoInstrumento;
 import Data.Usuario;
 
 public class UsuarioTest {
@@ -40,20 +45,146 @@ public class UsuarioTest {
 	void tearDown() throws Exception {
 	}
     */
-	
+	//Para el saldo he usado el assertEquals(double expected, double actual, double epsilon), ya que el assertEquals(double expected, double actual) estaba marcado como "Deprecated"
 	@Test
 	void testUsuario() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("Juan", u.getNombre());
+		assertEquals("juanito86", u.getContrasenya());
+		assertEquals("juanalberto@gmail.com", u.getEmail());
+		assertEquals(12, u.getSaldo(), 0);
+		assertEquals("JuanPaga", u.getCuentaPaypal());
+		assertEquals("0456 3452 1675 0100", u.getnTarjeta());
+		assertEquals("09/24", u.getCaducidadTarjeta());
+		assertEquals("312", u.getCodigoTarjeta());
+		assertNotNull(u.getComprasRealizadas());
+		assertTrue(u.getComprasRealizadas().isEmpty());
 	}
 	
 	@Test
 	void testGetNombre() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("Juan", u.getNombre());
 	}
 	
 	@Test
 	void testSetNombre() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setNombre("Juan");
+		assertEquals("Juan", u.getNombre());
 	}
 	
-//TODO el resto de test de la clase de usuario
+	@Test
+	void testGetContrasenya() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("juanito86", u.getContrasenya());
+	}
+	
+	@Test 
+	void testSetContrasenya() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setContrasenya("juanito86");
+		assertEquals("juanito86", u.getContrasenya());
+	}
+	
+	@Test 
+	void testGetEmail() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("juanalberto@gmail.com", u.getEmail());
+	}
+	
+	@Test
+	void testSetEmail() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setEmail("juanalberto@gmail.com");
+		assertEquals("juanalberto@gmail.com", u.getEmail());
+	}
+	
+	@Test
+	void testGetSaldo() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals(12, u.getSaldo(), 0);
+	}
+	
+	@Test
+	void testSetSaldo() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setSaldo(12);
+		assertEquals(12, u.getSaldo(), 0);
+	}
+	
+	@Test
+	void testGetCuentaPypal() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("JuanPaga", u.getCuentaPaypal());
+	}
+	
+	@Test
+	void testSetCuentaPaypal() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setCuentaPaypal("JuanPaga");
+		assertEquals("JuanPaga", u.getCuentaPaypal());
+	}
+	
+	@Test
+	void testGetnTarjeta() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("0456 3452 1675 0100", u.getnTarjeta());
+	}
+	
+	@Test
+	void testSetnTarjeta() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setnTarjeta("0456 3452 1675 0100");
+		assertEquals("0456 3452 1675 0100", u.getnTarjeta());
+	}
+	
+	@Test
+	void testGetCaducidadTarjeta() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("09/24", u.getCaducidadTarjeta());
+	}
+	
+	@Test
+	void testSetCaducidadTarjeta() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setCaducidadTarjeta("09/24");
+		assertEquals("09/24", u.getCaducidadTarjeta());
+	}
+	
+	@Test
+	void testGetCodigoTarjeta() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		assertEquals("312", u.getCodigoTarjeta());
+	}
 
-
+	@Test
+	void testSetCodigoTarjeta() {
+		Usuario u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+		u.setCodigoTarjeta("312");
+		assertEquals("312", u.getCodigoTarjeta());
+	}
+	
+	@Test
+	void testGetComprasRealizadas() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		ArrayList<Instrumento> compras = new ArrayList<>();
+		compras.add(new Instrumento("Piano", "Thomann", 1320, "Piano negro de cola", TipoInstrumento.CUERDA));
+		assertEquals(5, compras.size());
+		assertEquals("Piano", compras.get(0));
+		assertEquals("Thoman", compras.get(1));
+		assertEquals(1320, compras.get(2));
+		assertEquals("Piano negro de cola", compras.get(3));
+		assertEquals(TipoInstrumento.CUERDA, compras.get(4));
+		assertEquals(compras, u.getComprasRealizadas());
+		}
+	
+	@Test
+	void testSetComprasRealizadas() {
+		Usuario u = new Usuario("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", comprasRealizadas);
+		ArrayList<Instrumento> compras = new ArrayList<>();
+		compras.add(new Instrumento("Piano", "Thomann", 1320, "Piano negro de cola", TipoInstrumento.CUERDA));
+		u.setComprasRealizadas(compras);
+		assertEquals(compras, u.getComprasRealizadas());
+	}
 }
