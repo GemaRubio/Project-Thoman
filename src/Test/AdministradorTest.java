@@ -23,6 +23,16 @@ public class AdministradorTest {
 		assertEquals("312", a.getCodigoTarjeta());
 	}
 	
+	@Before
+	public void setUp() throws Exception {
+		u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		u = null;
+	}
+	
 	@Test
 	public void testGetCodigoAdmin() {
 		Administrador a = new Administrador("Juan", "juanito86", "juanalberto@gmail.com", 12, "JuanPaga", "0456 3452 1675 0100", "09/24", "312", new ArrayList<Instrumento>(), "ADMIN16");
