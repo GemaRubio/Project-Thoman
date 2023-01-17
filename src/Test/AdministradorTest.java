@@ -21,16 +21,17 @@ public class AdministradorTest {
 		assertEquals("0456 3452 1675 0100", a.getnTarjeta());
 		assertEquals("09/24", a.getCaducidadTarjeta());
 		assertEquals("312", a.getCodigoTarjeta());
+		assertEquals("ADMIN16", a.getCodigoAdmin());
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		u = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas, codigoAdmin);
+		a = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas, codigoAdmin);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		u = null;
+		a = null;
 	}
 	
 	@Test
