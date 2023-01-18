@@ -31,7 +31,7 @@ public class Main {
 	File f = new File("src\\Files\\ficheroUsuarios.dat");
 		
 	Usuario u1 = new Usuario("Fede", "fede", "fede@gmail.com", 0, "", "", "", "", new ArrayList<Instrumento>());
-	Administrador a1 = new Administrador("Admin", "admin", "admin@gmail.com", 0, "", "", "", "", new ArrayList<Instrumento>(), "ASDF576");
+	Administrador a1 = new Administrador("admin", "admin", "admin@gmail.com", 0, "", "", "", "", new ArrayList<Instrumento>(), "ASDF576");
 	
 	try {
 		if(!f.exists()) {
