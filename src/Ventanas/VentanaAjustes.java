@@ -1,20 +1,25 @@
 package Ventanas;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
+import Data.Usuario;
 
 public class VentanaAjustes extends JFrame {
 	
-	public VentanaAjustes() {
+	public VentanaAjustes(Usuario u) {
 		
-		// Configuración de la ventana.
+		// ConfiguraciÃ³n de la ventana.
 		setTitle("Ventana ajustes");
 		setSize(750, 300);
 		setLocation(450, 250);;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		// Creación de contenedores de la ventana y su configuración.
+		// CreaciÃ³n de contenedores de la ventana y su configuraciÃ³n.
 		JPanel pNorte = new JPanel();
 		pNorte.setLayout(new GridLayout(1,7));
 		JPanel pCentro = new JPanel();
@@ -22,20 +27,20 @@ public class VentanaAjustes extends JFrame {
 		JPanel pSur = new JPanel();
 		pSur.setLayout(new FlowLayout());
 		
-		// Creación de componentes de la ventana y su configuración.
+		// CreaciÃ³n de componentes de la ventana y su configuraciÃ³n.
 		JButton btnInicio = new JButton("Inicio");
 		JPanel pNombreTienda = new JPanel();
 		JPanel pPanelVacio1 = new JPanel();
 		JPanel pPanelVacio2 = new JPanel();
 		JPanel pPanelVacio3 = new JPanel();
 		JPanel pPanelVacio4 = new JPanel();
-		JButton btnRegistrarse = new JButton("Atrás");
-		JButton btnCambiarContrasenya = new JButton("Cambiar contraseña");
+		JButton btnRegistrarse = new JButton("AtrÃ¡s");
+		JButton btnCambiarContrasenya = new JButton("Cambiar contraseÃ±a");
 		JButton btnCambiarEmail = new JButton("Cambiar email");
-		JButton btnCambiarMetodosPago = new JButton("Cambiar métodos de pago");
+		JButton btnCambiarMetodosPago = new JButton("Cambiar mÃ©todos de pago");
 		JButton btnAceptar = new JButton("Aceptar");
 		
-		// Asignación de los componentes a los contenedores.
+		// AsignaciÃ³n de los componentes a los contenedores.
 		pNorte.add(btnInicio);
 		pNorte.add(pNombreTienda);
 		pNorte.add(pPanelVacio1);
@@ -52,10 +57,45 @@ public class VentanaAjustes extends JFrame {
 		add(pCentro, BorderLayout.CENTER);
 		add(pSur, BorderLayout.SOUTH);
 		
-		// Configuración de la ventana.
+		// ConfiguraciÃ³n de la ventana.
 		setVisible(true);
 		
-		// Configuración de los eventos.
+		// ConfiguraciÃ³n de los eventos.
+		
+		btnCambiarContrasenya.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaCambiarContrasenya vcc = new VentanaCambiarContrasenya(u);
+			}
+		});
+		
+		btnCambiarEmail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaCambiarEmail vce = new VentanaCambiarEmail(u);
+			}
+		});
+		
+		btnCambiarMetodosPago.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaCambiarMetodosPago vp = new VentanaCambiarMetodosPago(u);
+			}
+		});
+		
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaVerPerfil vvp = new VentanaVerPerfil(u);
+			}
+		});
+		
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaUsuario vu = new VentanaUsuario(u);
+			}
+		});
 		
 	}
 
