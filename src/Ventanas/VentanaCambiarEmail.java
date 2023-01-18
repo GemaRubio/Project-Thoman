@@ -1,20 +1,25 @@
 package Ventanas;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
+import Data.Usuario;
 
 public class VentanaCambiarEmail extends JFrame {
 	
-	public VentanaCambiarEmail() {
+	public VentanaCambiarEmail(Usuario u) {
 		
-		// Configuración de la ventana.
+		// ConfiguraciÃ³n de la ventana.
 		setTitle("Ventana cambiar email");
 		setSize(750, 300);
 		setLocation(450, 250);;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		// Creación de contenedores de la ventana y su configuración.
+		// CreaciÃ³n de contenedores de la ventana y su configuraciÃ³n.
 		JPanel pNorte = new JPanel();
 		pNorte.setLayout(new GridLayout(1,7));
 		JPanel pCentro = new JPanel();
@@ -22,20 +27,20 @@ public class VentanaCambiarEmail extends JFrame {
 		JPanel pSur = new JPanel();
 		pSur.setLayout(new FlowLayout());
 		
-		// Creación de componentes de la ventana y su configuración.
+		// CreaciÃ³n de componentes de la ventana y su configuraciÃ³n.
 		JButton btnInicio = new JButton("Inicio");
 		JPanel pNombreTienda = new JPanel();
 		JPanel pPanelVacio1 = new JPanel();
 		JPanel pPanelVacio2 = new JPanel();
 		JPanel pPanelVacio3 = new JPanel();
 		JPanel pPanelVacio4 = new JPanel();
-		JButton btnRegistrarse = new JButton("Atrás");
+		JButton btnRegistrarse = new JButton("AtrÃ¡s");
 		
 		JLabel lEmail = new JLabel("Email: ");
 		JTextField txtEmail = new JTextField();
 		JButton btnAceptar = new JButton("Aceptar");
 		
-		// Asignación de los componentes a los contenedores.
+		// AsignaciÃ³n de los componentes a los contenedores.
 		pNorte.add(btnInicio);
 		pNorte.add(pNombreTienda);
 		pNorte.add(pPanelVacio1);
@@ -51,10 +56,37 @@ public class VentanaCambiarEmail extends JFrame {
 		add(pCentro, BorderLayout.CENTER);
 		add(pSur, BorderLayout.SOUTH);
 		
-		// Configuración de la ventana.
+		// ConfiguraciÃ³n de la ventana.
 		setVisible(true);
 		
-		// Configuración de los eventos.
+		// ConfiguraciÃ³n de los eventos.
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(txtEmail.getText().contains("@") && txtEmail.getText().contains(".com")) {
+					u.setEmail(txtEmail.getText());
+					JOptionPane.showMessageDialog(null, "E.mail cambiado con exito");
+					dispose();
+					VentanaAjustes va = new VentanaAjustes(u);
+				} else {
+					JOptionPane.showMessageDialog(null, "E-mail no valido");
+				}
+			}
+		});
+		
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaAjustes va = new VentanaAjustes(u);
+			}
+		});
+		
+		btnInicio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaUsuario vp = new VentanaUsuario(u);
+			}
+		});
 		
 	}
 
