@@ -81,26 +81,25 @@ public class VentanaLogin extends JFrame{
 		//Boton Aceptar 
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean admin = false;
-				boolean loginU = false;
+				boolean login = false;
 				try {
 					FileInputStream ficheroLeer = new FileInputStream("src\\Files\\ficheroUsuarios.dat");
 					ObjectInputStream ois = new ObjectInputStream(ficheroLeer);
 					Object u = ois.readObject();
-					while(u != null && loginU == false) {
+					while(u != null && login == false) {
 						if(u instanceof Administrador) {
-							if(((Administrador)u).getNombre().equals(txtUsuario.getText()) && ((Administrador)u).getContrasenya().equals(txtContrasenya.getText()));
-								admin = true;
-								loginU = true;
+							if(((Administrador)u).getNombre().equals(txtUsuario.getText()) && ((Administrador)u).getContrasenya().equals(txtContrasenya.getText())){
+								login = true;
 								JOptionPane.showMessageDialog(null, "Login de administrador correcto");
 								dispose();
 								VentanaAdmin ad = new VentanaAdmin();
+							}
 						}
 						
-						if(u instanceof Usuario && admin == false) {
+						if(u instanceof Usuario && login == false) {
 							if(((Usuario) u).getNombre().equals(txtUsuario.getText()) && ((Usuario) u).getContrasenya().equals(txtContrasenya.getText())) {
 								JOptionPane.showMessageDialog(null, "Login correcto");
-								loginU = true;
+								login = true;
 								dispose();
 							}
 						}
