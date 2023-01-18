@@ -56,6 +56,27 @@ public class VentanaVerCarrito extends JFrame{
 		setVisible(true);
 		
 		// Configuración de los eventos.
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaUsuario vu = new VentanaUsuario(u);
+			}
+		});
+		
+		btnDesconectarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Logout realizado con exito");
+				dispose();
+				VentanaPrincipal vp = new VentanaPrincipal();
+			}
+		});
+		
+		btnVerPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VentanaVerPerfil vvp = new VentanaVerPerfil(u);
+			}
+		});
 		
 	}
 
