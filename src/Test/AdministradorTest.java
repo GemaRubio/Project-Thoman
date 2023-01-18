@@ -26,7 +26,7 @@ public class AdministradorTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		a = new Usuario(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas, codigoAdmin);
+		a = new Administrador(nombre, contrasenya, email, saldo, cuentaPaypal, nTarjeta, caducidadTarjeta, codigoTarjeta, comprasRealizadas, codigoAdmin);
 	}
 
 	@After
